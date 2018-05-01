@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import renderer from "react-test-renderer";
 import RepoTable from "./RepoTable";
 
@@ -9,8 +9,14 @@ describe("<RepoTable/>", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("renders without crashing", () => {
+  xit("renders without crashing", () => {
     const component = shallow(<RepoTable />);
     expect(component.exists()).toEqual(true);
+  });
+
+  it("fetches repos from GH and renders on mount", done => {
+    jest.mock("../services/github");
+
+    const component = shallow(<RepoTable />);
   });
 });

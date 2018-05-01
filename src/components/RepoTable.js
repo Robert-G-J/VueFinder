@@ -1,4 +1,5 @@
 import React from "react";
+import fetchFromGithub from "../services/github";
 import "./RepoTable.css";
 
 class RepoTable extends React.Component {
@@ -8,15 +9,16 @@ class RepoTable extends React.Component {
       repos: []
     };
   }
-  fetchRepos() {
-    const that = this;
-    fetch(
-      "https://api.github.com/search/repositories?q=vue+language:javascript&sort=stars&order=desc"
-    )
-      .then(res => res.json())
-      .then(res => that.setState({ repos: [...res.items] }))
-      .catch(err => console.error(err));
-  }
+  fetchRepos = async () => {
+    try {
+      const repos = await fetchFromGithub();
+      this.setState({
+        repos: [...repos]
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   componentDidMount() {
     this.fetchRepos();

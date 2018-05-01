@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RepoTable/> renders correctly 1`] = `
+<table
+  className="repo-table"
+>
+  <caption>
+    Most Starred Vue Repos
+  </caption>
+  <thead
+    className="table-head"
+  >
+    <tr>
+      <th
+        className="header"
+      >
+        Name
+      </th>
+      <th
+        className="header bp-tablet"
+      >
+        Description
+      </th>
+      <th
+        className="header stars"
+      >
+        Stars
+      </th>
+    </tr>
+  </thead>
+  <tbody />
+</table>
+`;
