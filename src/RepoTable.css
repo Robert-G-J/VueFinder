@@ -1,3 +1,57 @@
+/* Styles have been normalized with normalize.css */
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Helvetica, sans-serif;
+  font-family: Roboto, Helvetica, sans-serif;
+}
+
+/* Table Styles */
+
+table {
+  width: 100%;
+}
+
+td {
+  padding-right: 0.5rem;
+}
+
+th {
+  border-bottom: 1px solid #eee;
+}
+
+.repo-table th,
+.repo-table td {
+  text-align: left;
+}
+
+td.description {
+  font-weight: 300;
+}
+
+td.stars,
+th.stars {
+  text-align: right;
+  padding-right: 0.5rem;
+}
+
+th.header {
+  padding-bottom: 0.5rem;
+}
+
+td.row {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.bp-tablet {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .bp-tablet {
+    display: block;
+  }
 }
