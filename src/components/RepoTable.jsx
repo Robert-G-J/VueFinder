@@ -17,7 +17,7 @@ class RepoTable extends React.Component {
         repos: [...repos]
       });
     } catch (error) {
-      console.error("Oops- request failed");
+      console.error("Request failed");
     }
   }
 
