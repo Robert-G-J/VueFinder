@@ -9,21 +9,20 @@ class RepoTable extends React.Component {
       repos: []
     };
   }
-  fetchRepos = async () => {
+
+  async componentDidMount() {
     try {
       const repos = await fetchFromGithub();
       this.setState({
         repos: [...repos]
       });
     } catch (error) {
-      console.error(error);
+      console.error("Oops- request failed");
     }
-  };
-
-  componentDidMount() {
-    this.fetchRepos();
   }
+
   render() {
+    const { repos } = this.state;
     return (
       <table className="repo-table">
         <caption>Most Starred Vue Repos</caption>
@@ -35,7 +34,7 @@ class RepoTable extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.repos.map(repo => (
+          {repos.map(repo => (
             <tr key={repo.id}>
               <td className="row name">{repo.full_name}</td>
               <td className="row description bp-tablet">{repo.description}</td>

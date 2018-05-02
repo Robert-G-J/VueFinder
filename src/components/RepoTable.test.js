@@ -1,10 +1,10 @@
 import React from "react";
-import { mount, shallow } from "enzyme";
+import { shallow } from "enzyme";
 import renderer from "react-test-renderer";
 import RepoTable from "./RepoTable";
 
 describe("<RepoTable/>", () => {
-  jest.mock("../services/github");
+  jest.mock("../services/github.js");
 
   it("renders correctly", () => {
     const tree = renderer.create(<RepoTable />).toJSON();
@@ -16,14 +16,23 @@ describe("<RepoTable/>", () => {
     expect(wrapper.exists()).toEqual(true);
   });
 
-  it("fetches repos from GH and renders on mount", done => {
-    const wrapper = shallow(<RepoTable />);
-    setTimeout(() => {
-      wrapper.update();
-      const state = wrapper.instance().state;
-      expect(state.items.length).toEqual(1);
-      expect(wrapper.find("table").length).toEqual(1);
-      done();
+  describe("#componentDidMount", () => {
+    it("fetches repos from GH and renders on mount", async () => {
+      window.fetch = jest.fn().mockImplementation(() => ({
+        status: 200,
+        json: () =>
+          new Promise((resolve, reject) => {
+            resolve({
+              items: [
+                { id: 123, name: "vuey", description: "Funfun", stars: 234 }
+              ]
+            });
+          })
+      }));
+      const wrapper = await shallow(<RepoTable />);
+      await wrapper.update();
+      console.log(wrapper.state);
+      expect(wrapper.state("items").length).toEqual(1);
     });
   });
 });
