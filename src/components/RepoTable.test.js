@@ -34,5 +34,19 @@ describe("<RepoTable/>", () => {
       console.log(wrapper.state);
       expect(wrapper.state("items").length).toEqual(1);
     });
+
+    it("fetches repos from GH and renders on mount(alternate)", done => {
+      const wrapper = shallow(<RepoTable />);
+
+      setTimeout(() => {
+        wrapper.update();
+
+        const state = wrapper.instance().state;
+        expect(state.items.length).toEqual(3); // see stubData in __mocks__
+        expect(wrapper.find("tr.row").length).toEqual(3);
+
+        done();
+      });
+    });
   });
 });
